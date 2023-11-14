@@ -81,7 +81,7 @@ export class QuestionDialog {
   onSubmit(){
     this.submitted = true;
     if (this.questionForm.valid) {
-      this.dataService.questions.push({id: uuidv4(),title: this.questionForm.controls['question'].value, inputType: this.questionForm.controls['types'].value, checkboxOption: this.checkboxOptions, answer: ''});
+      this.dataService.questions.push({id: uuidv4(),title: this.questionForm.controls['question'].value, inputType: this.questionForm.controls['types'].value, checkboxOption: this.checkboxOptions, answer: '', answered: false});
        this.dataService.questions.forEach((element: any) => {
             if(element.inputType === 'checkbox'){
                 element.checkboxOption.push({name: 'Other', value: false});

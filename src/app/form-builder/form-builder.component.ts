@@ -43,16 +43,20 @@ export class FormBuilderComponent implements OnInit {
            if(!element.answered){
             flag++;
            }
-           if(!flag){
-             this.dataServices.enableReviewButton = true;
-           }
        });
+       if(!flag){
+            this.dataServices.enableReviewButton = true;
+        }
     }
   }
 
   handleAnswer(event: any, question: any) {
-    question.answer = event.target.value;
-    question.answered = true;
+    question.answer = event;
+    if(event == ''){
+      question.answered = false;
+    } else {
+        question.answered = true;
+    }
     this.allAnswerGiven();
   }
 

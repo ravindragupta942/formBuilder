@@ -4,7 +4,7 @@
             <label class="label-question" for="">{{question?.title}}</label>
         </section>
         <section class="input-field" *ngIf="question?.inputType === 'text'">
-            <textarea (keyup)="handleAnswer($event, question)" [(ngModel)]="question.answer" matInput class="textarea-mat" cdkTextareaAutosize
+            <textarea (ngModelChange)="handleAnswer($event, question)" [(ngModel)]="question.answer" matInput class="textarea-mat" cdkTextareaAutosize
                 #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"
                 placeholder="Answer"></textarea>
         </section>
