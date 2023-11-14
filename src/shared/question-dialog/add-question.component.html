@@ -1,0 +1,42 @@
+<section class="dialog-section">
+    <form class="form" [formGroup]="questionForm" (ngSubmit)="onSubmit()">
+    <p>Question</p>
+    <input placeholder="Type your question here" class="plain-text" formControlName="question" />
+    <p class="text-danger"
+        *ngIf="(questionFormControl['question'].touched || submitted) && questionFormControl['question'].errors?.['required']">
+        Name is required
+    </p>
+    <p>Answer Type</p>
+    <section class="checkbox-field">
+        <input type="radio" formControlName="types" (change)="onChangeDemo('text')" class="example-margin" value="text">Text
+        <input type="radio" formControlName="types" (change)="onChangeDemo('checkbox')" class="example-margin" value="checkbox">Checkbox
+        <p class="text-danger"
+            *ngIf="(questionFormControl['types'].touched || submitted) && questionFormControl['types'].errors?.['required']">
+            Type is required
+        </p>
+    </section>
+    <section *ngIf="isCheckbox">
+        <mat-form-field class="example-chip-list">
+            <mat-label>Please type checkbox option and then hit enter for select.</mat-label>
+            <mat-chip-grid #chipGrid aria-label="Enter Option">
+                <mat-chip-row *ngFor="let option of checkboxOptions" (removed)="remove(option)">
+                    {{option.name}}
+                    <button matChipRemove [attr.aria-label]="'remove ' + option.name">
+                        <mat-icon>cancel</mat-icon>
+                    </button>
+                </mat-chip-row>
+                <input placeholder="New option..." formControlName="checkboxOption" [matChipInputFor]="chipGrid"
+                    [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+                    (matChipInputTokenEnd)="add($event)" />
+            </mat-chip-grid>
+        </mat-form-field>
+        <p class="text-danger"
+            *ngIf="(questionFormControl['checkboxOption'].touched || submitted) && questionFormControl['checkboxOption'].errors?.['required']">
+            Checkbox option is required. 
+        </p>
+    </section>
+    <div class="review-rtyu">
+        <button mat-raised-button>Add</button>
+    </div>
+    </form>
+</section>

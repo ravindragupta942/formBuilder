@@ -1,0 +1,22 @@
+<div class="question-answer-form">
+    <section class="repeated-form" *ngFor="let question of questions; let index=index">
+        <section class="question-sec">
+            <label class="label-question" for="">{{question?.title}}</label>
+        </section>
+        <section class="input-field" *ngIf="question?.inputType === 'text'">
+            <textarea (keyup)="handleAnswer($event, question)" [(ngModel)]="question.answer" matInput class="textarea-mat" cdkTextareaAutosize
+                #autosize="cdkTextareaAutosize" cdkAutosizeMinRows="2" cdkAutosizeMaxRows="5"
+                placeholder="Answer"></textarea>
+        </section>
+        <section class="checkbox-field" *ngIf="question?.inputType === 'checkbox'">
+            <mat-checkbox  *ngFor="let item of question?.checkboxOption" [checked]="item.value" class="example-margin"
+                (change)="handleCheckbox($event, item, question)" [value]="item.name">{{item?.name}}</mat-checkbox>
+        </section>
+    </section>
+    <div class="add-button">
+        <button mat-raised-button (click)="openDialog()">Add Question</button>
+    </div>
+    <div class="review-button" *ngIf="dataServices.enableReviewButton">
+        <button mat-raised-button routerLink="/answer">Review my answer ></button>
+    </div>
+</div>
